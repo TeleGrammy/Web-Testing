@@ -1,0 +1,16 @@
+{
+  "normalLogin": {
+    "validEmail": "sanade3052@cironex.com",
+    "wrongEmail": "hamada3052@cironex.com",
+    "validPassword": "12345678",
+    "wrongPassword": "12345678aaa"
+  },
+  "gmailLogin": {
+    "validGmail": "tsttest978@gmail.com",
+    "wrongEmail": "hamada@gmail.com",
+    "validPassword": "T5^5VfIAdneV92pI",
+    "wrongPassword": "12345678aaa"
+  }
+}
+
+
