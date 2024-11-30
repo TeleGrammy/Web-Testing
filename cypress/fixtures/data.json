@@ -10,5 +10,13 @@
     "wrongEmail": "hamada@gmail.com",
     "validPassword": "T5^5VfIAdneV92pI",
     "wrongPassword": "12345678aaa"
+  },
+  "editInputs": {
+    "newName": "Hamada",
+    "newUserName":"hammo",
+    "newPhone": "+201125055389",
+    "newBio": "A farmer who study programming",
+    "newValidEmail": "test@test.com", 
+    "newInvalidEmail": "test.com"
   }
 }

@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import LoginPage from './page-objects/loginPage'
+import SettingsPage from './page-objects/settingsPage'
+
+Cypress.Commands.add('loginCommand', (email, password) => {
+    cy.visit('/auth/login')
+    LoginPage.emailInput.type(email)
+    LoginPage.passInput.type(password)
+    
+    LoginPage.singinButton.click()
+    cy.url().should('include', '/home')
+  })
+
+  Cypress.Commands.add('goToSettings', () => {
+    SettingsPage.menuButton.click()
+    SettingsPage.SettingsButton.click()
+    cy.get('h2').contains('Settings').should('be.visible')
+  })
