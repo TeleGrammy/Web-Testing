@@ -1,6 +1,7 @@
 class SettingsPage {
     get menuButton() { return cy.get("div[data-test-id='menu-button']") }
     get SettingsButton() { return cy.get("li[data-test-id='menu-Setting-item']")}
+    get themesButton() { return cy.get("li[data-test-id='dark-mode-button']")}
     get editButton() { return cy.get("button[data-test-id='edit-settings']")}
     get goBackButton() { return cy.get("button[data-test-id='go-back-button']")}    
     get nameInput() { return cy.get("input[data-test-id='name-input']")}    
