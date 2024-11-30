@@ -12,8 +12,8 @@ describe('login page', () => {
 
     beforeEach('navigate to login page and input field should be empty', () => {
         cy.visit('/auth/login')
-        cy.get("input[data-test-id='email-input']").should('be.empty')
-        cy.get("input[data-test-id='password-input']").should('be.empty')
+        LoginPage.emailInput.should('be.empty')
+        LoginPage.passInput.should('be.empty')
     })
 
     it('signin with valid email', () => { 
