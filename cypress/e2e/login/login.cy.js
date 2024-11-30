@@ -1,36 +1,50 @@
 
+import LoginPage from '../../support/page-objects/loginPage'
+
+
 describe('login page', () => {
 
-    beforeEach('navigate to login page and input field should be empty', () => {
-        cy.visit('/login')
-        cy.get("input[id='email']").should('be.empty')
-        cy.get("input[id='password']").should('be.empty')
-    });
+    before('load fixture', () => {
+        cy.fixture("data").then((data) => {
+            globalThis.data = data
+        })
+    })
 
-    it('signin with valid email', () => {
-        cy.get("input[id='email']").type("sanade3052@cironex.com")
-        cy.get("input[id='password']").type("12345678")
-        cy.get("button[id='sign-up']").click()
+    beforeEach('navigate to login page and input field should be empty', () => {
+        cy.visit('/auth/login')
+        cy.get("input[data-test-id='email-input']").should('be.empty')
+        cy.get("input[data-test-id='password-input']").should('be.empty')
+    })
+
+    it('signin with valid email', () => { 
+        LoginPage.emailInput.type(data.normalLogin.validEmail)
+        LoginPage.passInput.type(data.normalLogin.validPassword)
+        
+        LoginPage.singinButton.click()
         cy.url().should('include', '/home')
     })
 
     it('signin with invalid email', () => {
-        cy.get("input[id='email']").type("sanade3052")
-        cy.get("input[id='password']").type("12345678")
-        cy.get("button[id='sign-up']").click()
+        LoginPage.emailInput.type(data.normalLogin.wrongEmail)
+        LoginPage.passInput.type(data.normalLogin.validPassword)
+        LoginPage.singinButton.click()
         cy.url().should('not.include', '/home')
     })
 
     it('signin with wrong password', () => {
-        cy.get("input[id='email']").type("sanade3052@cironex.com")
-        cy.get("input[id='password']").type("1234rrrrr")
-        cy.get("button[id='sign-up']").click()
+        LoginPage.emailInput.type(data.normalLogin.validEmail)
+        LoginPage.passInput.type(data.normalLogin.wrongPassword)
+        LoginPage.singinButton.click()
         cy.url().should('not.include', '/home')
     })
 
     it('signin with empty inputs', () => {
-        cy.get("button[id='sign-up']").click()
+        LoginPage.singinButton.click()
         cy.url().should('not.include', '/home')
     })
 
+    it('return back to singup form', () => {
+        LoginPage.singupButton.click()
+        cy.url().should('include', '/signup/register')
+    })
 })
