@@ -4,8 +4,10 @@ class SignupPage {
     get phoneInput() { return cy.get("input[data-test-id='phone-input']")} 
     get passwordInput() { return cy.get("input[data-test-id='password-input']")} 
     get confirmPasswordInput() { return cy.get("input[data-test-id='confirm-password-input']")} 
-    get signupButton() { return cy.get("input[data-test-id='sign-up-button']")}    
-    get recaptchaAnchor() { return cy.get('#recaptcha-anchor')}
+    get signupButton() { return cy.get("button[data-test-id='sign-up-button']")}    
+    get recaptchaAnchor() { return cy.get("div[id='rc-anchor-container']")}
+    get googleSignupButton() { return cy.get("button[data-testid='social-login-button-google']")}    
+    get githubSignupButton() { return cy.get("button[data-testid='social-login-button-github']")}    
 }
 
 export default new SignupPage()
