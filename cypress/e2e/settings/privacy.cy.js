@@ -50,14 +50,6 @@ describe('privacy test', () => {
           .should('have.value', 'Admins');
     })
 
-    it('should update option in dropdown', () => {
-
-        PrivacyPage.profilePictureVisibilityDropdown.select('Contacts')
-        PrivacyPage.goBackButton.click()
-        PrivacyPage.privacyButton.click() 
-        PrivacyPage.profilePictureVisibilityDropdown.should('have.value', 'Contacts')
-         
-    })
 
     it('should display "No blocked users" when there are no blocked users', () => {
         
@@ -85,5 +77,14 @@ describe('privacy test', () => {
 
     PrivacyPage.readReceiptsCheckbox.should('not.be.checked');
     PrivacyPage.readReceiptsStatus.should('contain.text', 'Disabled');
+    })
+
+    it('should update option in dropdown', () => {
+
+        PrivacyPage.profilePictureVisibilityDropdown.select('Contacts')
+        PrivacyPage.goBackButton.click()
+        PrivacyPage.privacyButton.click() 
+        PrivacyPage.profilePictureVisibilityDropdown.should('have.value', 'Contacts')
+         
     })
 })

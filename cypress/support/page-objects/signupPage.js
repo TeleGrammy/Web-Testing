@@ -5,7 +5,7 @@ class SignupPage {
     get passwordInput() { return cy.get("input[data-test-id='password-input']")} 
     get confirmPasswordInput() { return cy.get("input[data-test-id='confirm-password-input']")} 
     get signupButton() { return cy.get("button[data-test-id='sign-up-button']")}    
-    get recaptchaAnchor() { return cy.get("[data-test-id='captcha']")}
+    get authButton() { return cy.get("button[data-testid='auth-button']")}
     get googleSignupButton() { return cy.get("button[data-testid='social-login-button-google']")}    
     get githubSignupButton() { return cy.get("button[data-testid='social-login-button-github']")}    
 }

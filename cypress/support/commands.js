@@ -27,6 +27,7 @@ import LoginPage from './page-objects/loginPage'
 import EditProfilePage from './page-objects/editProfilePage'
 import PrivacyPage from './page-objects/privacyPage'
 import SignupPage from './page-objects/signupPage'
+import 'cypress-iframe'
 
 Cypress.Commands.add('loginCommand', (email, password) => {
     cy.visit('/auth/login')
@@ -53,14 +54,14 @@ Cypress.Commands.add('loginCommand', (email, password) => {
   Cypress.Commands.add('signupCommand', (data) => {
 
     cy.visit('/auth/signup/register')
-    SignupPage.userNameInput.type(data.signupData.username);
+    cy.confirmCaptcha()
+    SignupPage.userNameInput.type(data.signupData.username2);
     SignupPage.emailInput.type(data.signupData.email2);
     SignupPage.phoneInput.type(data.signupData.phone2);
     SignupPage.passwordInput.type(data.signupData.password);
     SignupPage.confirmPasswordInput.type(data.signupData.password);
 
-    // cy.confirmCaptcha()
-
+    
     SignupPage.signupButton.click();
 
     cy.url().should('include', '/signup/verify');
@@ -68,10 +69,8 @@ Cypress.Commands.add('loginCommand', (email, password) => {
 
 
   Cypress.Commands.add('confirmCaptcha', function () {
-    cy.get('iframe')
-      .first()
-      .then((recaptchaIframe) => {
-        const body = recaptchaIframe.contents()
-        cy.wrap(body).find('.recaptcha-checkbox-border').should('be.visible').click()
-      })
+    cy.wait(500)
+    cy.frameLoaded('iframe[title="reCAPTCHA"]');
+    cy.iframe('iframe[title="reCAPTCHA"]').find('.recaptcha-checkbox-border').click();
+    cy.wait(1500)
   })

@@ -1,4 +1,4 @@
-import VerifyEmailPage from './VerifyEmailPage';
+import VerifyEmailPage from "../../support/page-objects/verifyEmailPage"
 
 describe('Email Verification Flow', () => {
     before('load fixture', () => {

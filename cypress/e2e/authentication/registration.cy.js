@@ -1,4 +1,4 @@
-import SignupPage from "../../support/page-objects/signupPage";
+import SignupPage from "../../support/page-objects/signupPage"
 
 describe('signup page', () => {
 
@@ -9,20 +9,20 @@ describe('signup page', () => {
     })
 
     beforeEach('navigate to login page and input field should be empty', () => {
-        
         cy.visit('/auth/signup/register')
         SignupPage.userNameInput.should('be.empty')
         SignupPage.emailInput.should('be.empty')
         SignupPage.phoneInput.should('be.empty')
         SignupPage.passwordInput.should('be.empty')
         SignupPage.confirmPasswordInput.should('be.empty')
+        SignupPage.authButton.click()
+        SignupPage.authButton.click()
+        SignupPage.authButton.click()
+        SignupPage.authButton.click()
+        
+        cy.wait(500)
     })
 
-    // it('test recapcha', () => { 
-
-    //     SignupPage.recaptchaAnchor.click()
-    //     cy.confirmCaptcha()
-    // })
     
     it('should show social login buttons', () => {
         SignupPage.googleSignupButton.should('be.visible');
@@ -43,13 +43,12 @@ describe('signup page', () => {
 
     it('should not go to verification page if email is not valid', () => {
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
         SignupPage.emailInput.type(data.signupData.invalidEmail);
         SignupPage.phoneInput.type(data.signupData.phone);
         SignupPage.passwordInput.type(data.signupData.password);
         SignupPage.confirmPasswordInput.type(data.signupData.password);    
-        
-        // cy.confirmCaptcha()
         
         SignupPage.signupButton.click();
     
@@ -57,14 +56,14 @@ describe('signup page', () => {
     })
 
     it('should not go to verification page if passwords does not match', () => {
+
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
         SignupPage.emailInput.type(data.signupData.email);
         SignupPage.phoneInput.type(data.signupData.phone);
         SignupPage.passwordInput.type(data.signupData.password);
         SignupPage.confirmPasswordInput.type(data.signupData.unmachedPassword);    
-
-        // cy.confirmCaptcha()
 
         SignupPage.signupButton.click();
     
@@ -73,13 +72,12 @@ describe('signup page', () => {
 
     it('should not go to verification page if password is too short', () => {
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
         SignupPage.emailInput.type(data.signupData.email);
         SignupPage.phoneInput.type(data.signupData.phone);
         SignupPage.passwordInput.type(data.signupData.shortPassword);
         SignupPage.confirmPasswordInput.type(data.signupData.shortPassword);    
-
-        // cy.confirmCaptcha()
 
         SignupPage.signupButton.click();
     
@@ -88,13 +86,12 @@ describe('signup page', () => {
 
     it('should not go to verification page if any input field is empty', () => {
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
         SignupPage.emailInput.type(data.signupData.email);
         SignupPage.phoneInput.type(data.signupData.phone);
         SignupPage.passwordInput.type(data.signupData.password);
         SignupPage.confirmPasswordInput.type(data.signupData.password);    
-
-        // cy.confirmCaptcha()
 
         SignupPage.userNameInput.clear()
         SignupPage.signupButton.click()
@@ -114,39 +111,69 @@ describe('signup page', () => {
         SignupPage.confirmPasswordInput.clear()
         SignupPage.signupButton.click()
         cy.url().should('not.include', '/signup/verify'); 
-        SignupPage.confirmPasswordInput.type(data.signupData.password); 
 
         // cy.url().should('include', '/signup/verify'); 
     })
 
     it('should successfully go to verification page if a new user', () => {
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
         SignupPage.emailInput.type(data.signupData.email);
         SignupPage.phoneInput.type(data.signupData.phone);
         SignupPage.passwordInput.type(data.signupData.password);
         SignupPage.confirmPasswordInput.type(data.signupData.password);
     
-        // cy.confirmCaptcha()
-    
+        
         SignupPage.signupButton.click();
     
         cy.url().should('include', '/signup/verify'); 
     })
 
-    it('should not go to verification page if a duplicated email', () => {
+    it('should not go to verification page if a duplicated user name', () => {
         
+        cy.confirmCaptcha()
         SignupPage.userNameInput.type(data.signupData.username);
-        SignupPage.emailInput.type(data.signupData.email);
-        SignupPage.phoneInput.type(data.signupData.phone);
+        SignupPage.emailInput.type(data.signupData.email2);
+        SignupPage.phoneInput.type(data.signupData.phone2);
         SignupPage.passwordInput.type(data.signupData.password);
         SignupPage.confirmPasswordInput.type(data.signupData.password);
     
-        // cy.confirmCaptcha()
-    
+        
         SignupPage.signupButton.click();
     
         cy.url().should('not.include', '/signup/verify'); 
     })
+  
+    it('should not go to verification page if a duplicated email', () => {
+        
+        cy.confirmCaptcha()
+        SignupPage.userNameInput.type(data.signupData.username2);
+        SignupPage.emailInput.type(data.signupData.email);
+        SignupPage.phoneInput.type(data.signupData.phone2);
+        SignupPage.passwordInput.type(data.signupData.password);
+        SignupPage.confirmPasswordInput.type(data.signupData.password);
+    
+        
+        SignupPage.signupButton.click();
+    
+        cy.url().should('not.include', '/signup/verify'); 
+    })
+
+    it('should not go to verification page if a duplicated phone number', () => {
+        
+        cy.confirmCaptcha()
+        SignupPage.userNameInput.type(data.signupData.username2);
+        SignupPage.emailInput.type(data.signupData.email2);
+        SignupPage.phoneInput.type(data.signupData.phone);
+        SignupPage.passwordInput.type(data.signupData.password);
+        SignupPage.confirmPasswordInput.type(data.signupData.password);
+    
+        
+        SignupPage.signupButton.click();
+    
+        cy.url().should('not.include', '/signup/verify'); 
+    })
+  
     
 })
