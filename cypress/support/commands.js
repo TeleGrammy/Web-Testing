@@ -26,6 +26,7 @@
 import LoginPage from './page-objects/loginPage'
 import EditProfilePage from './page-objects/editProfilePage'
 import PrivacyPage from './page-objects/privacyPage'
+import SignupPage from './page-objects/signupPage'
 
 Cypress.Commands.add('loginCommand', (email, password) => {
     cy.visit('/auth/login')
@@ -47,4 +48,30 @@ Cypress.Commands.add('loginCommand', (email, password) => {
     EditProfilePage.settingsButton.click()
     PrivacyPage.privacyButton.click()
     PrivacyPage.privacyTitle.contains('Privacy Settings').should('be.visible')
+  })
+
+  Cypress.Commands.add('signupCommand', (data) => {
+
+    cy.visit('/auth/signup/register')
+    SignupPage.userNameInput.type(data.signupData.username);
+    SignupPage.emailInput.type(data.signupData.email2);
+    SignupPage.phoneInput.type(data.signupData.phone2);
+    SignupPage.passwordInput.type(data.signupData.password);
+    SignupPage.confirmPasswordInput.type(data.signupData.password);
+
+    // cy.confirmCaptcha()
+
+    SignupPage.signupButton.click();
+
+    cy.url().should('include', '/signup/verify');
+  })
+
+
+  Cypress.Commands.add('confirmCaptcha', function () {
+    cy.get('iframe')
+      .first()
+      .then((recaptchaIframe) => {
+        const body = recaptchaIframe.contents()
+        cy.wrap(body).find('.recaptcha-checkbox-border').should('be.visible').click()
+      })
   })

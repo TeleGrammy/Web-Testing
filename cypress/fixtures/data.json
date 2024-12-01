@@ -22,7 +22,10 @@
   "signupData": {
     "username": "testuser",
     "email": "testuser@example.com",
+    "email2": "testuser2@example.com",
+    "invalidEmail":"test1234",
     "phone": "01125035555",
+    "phone2": "01125035553",
     "password": "Test@1234",
     "unmachedPassword": "Test@3456", 
     "shortPassword": "123"
