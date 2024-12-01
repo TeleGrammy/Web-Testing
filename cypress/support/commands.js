@@ -24,7 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import LoginPage from './page-objects/loginPage'
-import SettingsPage from './page-objects/settingsPage'
+import EditProfilePage from './page-objects/editProfilePage'
+import PrivacyPage from './page-objects/privacyPage'
 
 Cypress.Commands.add('loginCommand', (email, password) => {
     cy.visit('/auth/login')
@@ -36,7 +37,14 @@ Cypress.Commands.add('loginCommand', (email, password) => {
   })
 
   Cypress.Commands.add('goToSettings', () => {
-    SettingsPage.menuButton.click()
-    SettingsPage.SettingsButton.click()
+    EditProfilePage.menuButton.click()
+    EditProfilePage.settingsButton.click()
     cy.get('h2').contains('Settings').should('be.visible')
+  })
+
+  Cypress.Commands.add('goToPrivacy', () => {
+    EditProfilePage.menuButton.click()
+    EditProfilePage.settingsButton.click()
+    PrivacyPage.privacyButton.click()
+    PrivacyPage.privacyTitle.contains('Privacy Settings').should('be.visible')
   })
