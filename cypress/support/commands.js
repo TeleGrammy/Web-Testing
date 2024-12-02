@@ -1,28 +1,3 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import LoginPage from './page-objects/loginPage'
 import EditProfilePage from './page-objects/editProfilePage'
 import PrivacyPage from './page-objects/privacyPage'
@@ -38,39 +13,45 @@ Cypress.Commands.add('loginCommand', (email, password) => {
     cy.url().should('include', '/home')
   })
 
-  Cypress.Commands.add('goToSettings', () => {
-    EditProfilePage.menuButton.click()
-    EditProfilePage.settingsButton.click()
-    cy.get('h2').contains('Settings').should('be.visible')
-  })
+Cypress.Commands.add('logoutCommand', () => {
+  EditProfilePage.menuButton.click()
+  EditProfilePage.logoutButton.click()
+  cy.url().should('include', '/auth/login')
+})
 
-  Cypress.Commands.add('goToPrivacy', () => {
-    EditProfilePage.menuButton.click()
-    EditProfilePage.settingsButton.click()
-    PrivacyPage.privacyButton.click()
-    PrivacyPage.privacyTitle.contains('Privacy Settings').should('be.visible')
-  })
+Cypress.Commands.add('goToSettings', () => {
+  EditProfilePage.menuButton.click()
+  EditProfilePage.settingsButton.click()
+  cy.get('h2').contains('Settings').should('be.visible')
+})
 
-  Cypress.Commands.add('signupCommand', (data) => {
+Cypress.Commands.add('goToPrivacy', () => {
+  EditProfilePage.menuButton.click()
+  EditProfilePage.settingsButton.click()
+  PrivacyPage.privacyButton.click()
+  PrivacyPage.privacyTitle.contains('Privacy Settings').should('be.visible')
+})
 
-    cy.visit('/auth/signup/register')
-    cy.confirmCaptcha()
-    SignupPage.userNameInput.type(data.signupData.username2);
-    SignupPage.emailInput.type(data.signupData.email2);
-    SignupPage.phoneInput.type(data.signupData.phone2);
-    SignupPage.passwordInput.type(data.signupData.password);
-    SignupPage.confirmPasswordInput.type(data.signupData.password);
+Cypress.Commands.add('signupCommand', (data) => {
 
-    
-    SignupPage.signupButton.click();
+  cy.visit('/auth/signup/register')
+  cy.confirmCaptcha()
+  SignupPage.userNameInput.type(data.signupData.username2);
+  SignupPage.emailInput.type(data.signupData.email2);
+  SignupPage.phoneInput.type(data.signupData.phone2);
+  SignupPage.passwordInput.type(data.signupData.password);
+  SignupPage.confirmPasswordInput.type(data.signupData.password);
 
-    cy.url().should('include', '/signup/verify');
-  })
+  
+  SignupPage.signupButton.click();
+
+  cy.url().should('include', '/signup/verify');
+})
 
 
-  Cypress.Commands.add('confirmCaptcha', function () {
-    cy.wait(500)
-    cy.frameLoaded('iframe[title="reCAPTCHA"]');
-    cy.iframe('iframe[title="reCAPTCHA"]').find('.recaptcha-checkbox-border').click();
-    cy.wait(1500)
-  })
+Cypress.Commands.add('confirmCaptcha', function () {
+  cy.wait(500)
+  cy.frameLoaded('iframe[title="reCAPTCHA"]');
+  cy.iframe('iframe[title="reCAPTCHA"]').find('.recaptcha-checkbox-border').click();
+  cy.wait(1500)
+})
