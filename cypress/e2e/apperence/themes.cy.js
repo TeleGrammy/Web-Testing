@@ -1,5 +1,5 @@
 
-import SettingsPage from '../../support/page-objects/settingsPage'
+import EditProfilePage from '../../support/page-objects/editProfilePage'
 
 
 describe('Theme Toggle Tests', () => {
@@ -13,14 +13,14 @@ describe('Theme Toggle Tests', () => {
   
     it('should toggle when the theme button is clicked', () => {
         cy.loginCommand(data.normalLogin.validEmail, data.normalLogin.validPassword)
-        SettingsPage.menuButton.click()
+        EditProfilePage.menuButton.click()
 
         cy.get('html').should('not.have.class', 'dark-theme');
 
-        SettingsPage.themesButton.click()
+        EditProfilePage.themesButton.click()
         cy.get('html').should('have.class', 'dark-theme');
         
-        SettingsPage.themesButton.click()
+        EditProfilePage.themesButton.click()
         cy.get('html').should('not.have.class', 'dark-theme');
     })
   

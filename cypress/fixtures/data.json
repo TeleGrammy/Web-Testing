@@ -18,5 +18,17 @@
     "newBio": "A farmer who study programming",
     "newValidEmail": "test@test.com", 
     "newInvalidEmail": "test.com"
+  }, 
+  "signupData": {
+    "username": "testu13",
+    "username2": "testu12",
+    "email": "tobeDelete15@example.com",
+    "email2": "tobeDelete12@example.com",
+    "invalidEmail":"test1234",
+    "phone": "01248031155",
+    "phone2": "01218035553",
+    "password": "Test@1234",
+    "unmachedPassword": "Test@3456", 
+    "shortPassword": "123"
   }
 }
