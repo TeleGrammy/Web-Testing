@@ -1,6 +1,6 @@
 import GroupChannelPage from "../../support/page-objects/groupChannelPage"
 
-describe('Searching when adding members', () => {
+describe('Searching in chats (users name)', () => {
 
     before('load fixture', () => {
         cy.fixture("data").then((data) => {
@@ -10,37 +10,30 @@ describe('Searching when adding members', () => {
 
     beforeEach(() => {
         cy.loginCommand(data.normalLogin.validEmail, data.normalLogin.validPassword)
-        GroupChannelPage.createButton.should('be.visible')
-        GroupChannelPage.createButton.click();
-        GroupChannelPage.newChannelButton.should('exist').click()
-        GroupChannelPage.createButton.should('not.exist');
-        GroupChannelPage.channelNameInput.type('TEST_CHANNEL')
-        GroupChannelPage.descriptionInput.type('Channel description')
-        GroupChannelPage.createButton.should('be.visible').click();
     });
 
 
-    it('should filter users based on search query', () => {
+    it('should filter chats based on search query', () => {
 
-        GroupChannelPage.usersList
+        GroupChannelPage.chatList
           .should('exist')
           .children()
           .should('have.length.greaterThan', 0); 
     
-        const searchQuery = 'Adham Hussin'; 
+        const searchQuery = 'user1'; 
         GroupChannelPage.searchInput
           .type(searchQuery)
           .should('have.value', searchQuery); 
     
-        GroupChannelPage.usersList
+        GroupChannelPage.chatList
         .should('exist')
         .children()
-        .should('have.length', 3); 
+        .should('have.length', 1); 
     
-        GroupChannelPage.usersList
+        GroupChannelPage.chatList
           .children()
           .each(($userItem) => {
-            const userName = $userItem.find('[data-test-id^="user-name"]').text();
+            const userName = $userItem.find('[data-test-id^="chat-name"]').text();
             
             if (userName !== searchQuery) {
               cy.wrap($userItem).should('not.be.visible');
@@ -52,18 +45,21 @@ describe('Searching when adding members', () => {
         GroupChannelPage.searchInput
           .clear()
           .should('have.value', '') 
-          .get('[data-test-id="user-list"]')
+          .get('[data-test-id="chats-list"]')
           .children()
           .should('have.length.greaterThan', 0);
       });
     
-      it('should show no users when searching for a non-existent user', () => {
-        const searchQuery = 'NonExistentUser';
+      it('should show no chats when searching for a non-existent chat', () => {
+        const searchQuery = 'NonExistentChat';
         GroupChannelPage.searchInput
           .type(searchQuery)
           .should('have.value', searchQuery); 
     
-        GroupChannelPage.noUsersMessage.should('exist').should('be.visible')
+          GroupChannelPage.chatList
+          .should('exist')
+          .children()
+          .should('have.length', 0);
         
       });
    
