@@ -103,6 +103,22 @@ class ChatMessagesPage {
     get sendMessageButton() {
         return cy.get("button[data-test-id='send-message-button']");
     }
+
+    get sentImage() {
+        return cy.get("img[data-test-id='2-message-image']");
+    }
+    get sentDocument() {
+        return cy.get("a[data-test-id='2-document-link']");
+    }
+
+    get sentVideo() {
+        return cy.get("video[class='h-auto max-w-full rounded-lg]");
+    }
+
+    get sentVoiceNote() {
+        return cy.get("div[data-test-id='voice-note-player']");
+    }
+
 }
 
 export default new ChatMessagesPage();
