@@ -3,6 +3,8 @@ import EditProfilePage from './page-objects/editProfilePage'
 import PrivacyPage from './page-objects/privacyPage'
 import SignupPage from './page-objects/signupPage'
 import 'cypress-iframe'
+import 'cypress-file-upload';
+
 
 Cypress.Commands.add('loginCommand', (email, password) => {
     cy.visit('/auth/login')
