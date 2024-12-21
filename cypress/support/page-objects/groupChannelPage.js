@@ -7,6 +7,9 @@ class GroupChannelPage {
     get userCheckbox() { return cy.get("input[data-test-id='user-checkbox-1']")}    
     get newChannelChat() { return cy.get("li[data-test-id='chat-item-5']")} 
     get chatList() { return cy.get('ul[data-test-id="chats-list"]')} 
+    get usersList() { return cy.get('ul[data-test-id="user-list"]')} 
+    get searchInput() { return cy.get('input[data-test-id="search-input"]')} 
+    get noUsersMessage() { return cy.get('p[data-test-id="no-users-message"]')} 
     
 }
 

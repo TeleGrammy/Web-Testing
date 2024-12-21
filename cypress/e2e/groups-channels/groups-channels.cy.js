@@ -1,6 +1,6 @@
 import GroupChannelPage from "../../support/page-objects/groupChannelPage"
 
-describe('Chat Attachments and Audio Recording', () => {
+describe('Groups and channels creation', () => {
 
     before('load fixture', () => {
         cy.fixture("data").then((data) => {
