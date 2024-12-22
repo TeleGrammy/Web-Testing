@@ -22,6 +22,9 @@ class ChatMessagesPage {
     get chatItemButton() {
         return cy.get("li[data-test-id='chat-item-3']");
     }
+    get channelItemButton() {
+        return cy.get("li[data-test-id='chat-item-4']");
+    }
     get sentMessageEditButton() {
         return cy.get("button[data-test-id='2-message-edit-button']");
     }
@@ -104,11 +107,20 @@ class ChatMessagesPage {
         return cy.get("button[data-test-id='send-message-button']");
     }
 
+    // For normal chat 
     get sentImage() {
         return cy.get("img[data-test-id='2-message-image']");
     }
     get sentDocument() {
         return cy.get("a[data-test-id='2-document-link']");
+    }
+
+    // For channel chat 
+    get channelSentImage() {
+        return cy.get("img[data-test-id='0-message-image']");
+    }
+    get channelSentDocument() {
+        return cy.get("a[data-test-id='0-document-link']");
     }
 
     get sentVideo() {
